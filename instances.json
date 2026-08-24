@@ -1,0 +1,16 @@
+[
+  { "slug": "frontrange",    "name": "Front Range Community College",       "domain": "frontrange.edu",      "resultsRepo": "frcc-audit",   "toolingRepo": "audit-frontrange.edu",    "siteUrl": "https://thirstyhead.com/frcc-audit/" },
+  { "slug": "arapahoe",      "name": "Arapahoe Community College",          "domain": "arapahoe.edu",        "resultsRepo": "arcc-audit",   "toolingRepo": "audit-arapahoe.edu",      "siteUrl": "https://thirstyhead.com/arcc-audit/" },
+  { "slug": "cncc",          "name": "Colorado Northwestern Community College", "domain": "cncc.edu",       "resultsRepo": "cncc-audit",   "toolingRepo": "audit-cncc.edu",          "siteUrl": "https://thirstyhead.com/cncc-audit/" },
+  { "slug": "ccaurora",      "name": "Community College of Aurora",         "domain": "ccaurora.edu",        "resultsRepo": "cca-audit",    "toolingRepo": "audit-ccaurora.edu",      "siteUrl": "https://thirstyhead.com/cca-audit/" },
+  { "slug": "ccd",           "name": "Community College of Denver",         "domain": "ccd.edu",             "resultsRepo": "ccd-audit",    "toolingRepo": "audit-ccd.edu",           "siteUrl": "https://thirstyhead.com/ccd-audit/" },
+  { "slug": "lamarcc",       "name": "Lamar Community College",             "domain": "lamarcc.edu",         "resultsRepo": "lcc-audit",    "toolingRepo": "audit-lamarcc.edu",       "siteUrl": "https://thirstyhead.com/lcc-audit/" },
+  { "slug": "morgancc",      "name": "Morgan Community College",            "domain": "www.morgancc.edu",    "resultsRepo": "mcc-audit",    "toolingRepo": "audit-morgancc.edu",      "siteUrl": "https://thirstyhead.com/mcc-audit/" },
+  { "slug": "njc",           "name": "Northeastern Junior College",         "domain": "njc.edu",             "resultsRepo": "njc-audit",    "toolingRepo": "audit-njc.edu",           "siteUrl": "https://thirstyhead.com/njc-audit/" },
+  { "slug": "otero",         "name": "Otero College",                       "domain": "otero.edu",           "resultsRepo": "otero-audit",  "toolingRepo": "audit-otero.edu",         "siteUrl": "https://thirstyhead.com/otero-audit/" },
+  { "slug": "pikespeak",     "name": "Pikes Peak State College",            "domain": "pikespeak.edu",       "resultsRepo": "ppsc-audit",   "toolingRepo": "audit-pikespeak.edu",     "siteUrl": "https://thirstyhead.com/ppsc-audit/" },
+  { "slug": "pueblocc",      "name": "Pueblo Community College",            "domain": "pueblocc.edu",        "resultsRepo": "pcc-audit",    "toolingRepo": "audit-pueblocc.edu",      "siteUrl": "https://thirstyhead.com/pcc-audit/" },
+  { "slug": "rrcc",          "name": "Red Rocks Community College",         "domain": "rrcc.edu",            "resultsRepo": "rrcc-audit",   "toolingRepo": "audit-rrcc.edu",          "siteUrl": "https://thirstyhead.com/rrcc-audit/" },
+  { "slug": "trinidadstate", "name": "Trinidad State College",              "domain": "trinidadstate.edu",   "resultsRepo": "tsc-audit",    "toolingRepo": "audit-trinidadstate.edu", "siteUrl": "https://thirstyhead.com/tsc-audit/" },
+  { "slug": "cccs",          "name": "Colorado Community College System",   "domain": "cccs.edu",            "resultsRepo": "cccs-audit",   "toolingRepo": "audit-cccs.edu",          "siteUrl": "https://thirstyhead.com/cccs-audit/" }
+]
