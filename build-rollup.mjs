@@ -151,10 +151,10 @@ function trendSpark(series) {
   const dots = pts
     .map(
       (v, i) =>
-        `<circle cx="${x(i).toFixed(1)}" cy="${y(v).toFixed(1)}" r="${i === last ? 2.6 : 1.6}" fill="${i === last ? '#E86A4E' : '#0693E3'}"/>`,
+        `<circle cx="${x(i).toFixed(1)}" cy="${y(v).toFixed(1)}" r="${i === last ? 2.6 : 1.6}" fill="${i === last ? '#D74026' : '#004165'}"/>`,
     )
     .join('');
-  return `<svg class="spark" width="${w}" height="${h}" role="img" aria-label="${pts.length} runs, latest ${pts[last]} violations"><polyline points="${line}" fill="none" stroke="#0693E3" stroke-width="1.5"/>${dots}</svg>`;
+  return `<svg class="spark" width="${w}" height="${h}" role="img" aria-label="${pts.length} runs, latest ${pts[last]} violations"><polyline points="${line}" fill="none" stroke="#03738C" stroke-width="1.5"/>${dots}</svg>`;
 }
 
 const blockedBadge = (r) =>
@@ -192,9 +192,12 @@ const html = `<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CCCS Accessibility — Power of 13 Rollup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    color-scheme: dark;
+    color-scheme: light;
     /* CCCS brand palette (source: cccs.edu theme --wp--preset--color--*) */
     --cccs-blue: #004165;
     --cccs-navy: #03202F;
@@ -204,57 +207,65 @@ const html = `<!doctype html>
     --cccs-soft-yellow: #FADD80;
     --cccs-turquoise: #03738C;
     --cccs-orange: #D74026;
-    /* derived dark-dashboard surfaces tinted from navy (AA-checked on --bg) */
-    --bg: #03202F;
-    --surface: #0A2C3D;
-    --surface-2: #0E3446;
-    --border: #1C3A4A;
-    --text: #E6EDF3;
-    --text-2: #9FB3C1;
-    --link: #FFCB4F;
-    --accent: #0693E3;
-    --warn: #E86A4E;
+    /* light-theme surfaces — cccs.edu is a white editorial site (body #fff,
+       text gray-blue, blue header band, tan footer) */
+    --bg: #ffffff;
+    --text: #394A58;
+    --text-strong: #03202F;
+    --link: #004165;
+    --border: #e3e1da;
+    --row-head: #eff2f4;
+    --warn: #D74026; /* brand orange, 4.52:1 on white (AA) */
   }
-  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-         margin: 0; background: var(--bg); color: var(--text); }
-  /* full-width brand accent bar (cccs.edu header blue->navy with a yellow rule) */
-  .brandbar { height: 6px; background: linear-gradient(to right, var(--cccs-blue), var(--cccs-navy)); border-bottom: 3px solid var(--cccs-yellow); }
-  .wrap { max-width: 1120px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
-  h1 { font-size: 1.6rem; margin: 0 0 .25rem; }
-  .sub { color: var(--text-2); margin: 0 0 1.5rem; }
-  .stats { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
-  .stat { background: var(--surface); border: 1px solid var(--border); border-top: 3px solid var(--cccs-turquoise); border-radius: 8px; padding: .75rem 1rem; }
-  .stat b { display: block; font-size: 1.4rem; }
-  .stat span { color: var(--text-2); font-size: .8rem; }
-  table { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
-  th, td { text-align: left; padding: .6rem .75rem; border-bottom: 1px solid var(--border); vertical-align: top; }
-  th { background: var(--surface-2); color: var(--text-2); font-size: .78rem; text-transform: uppercase; letter-spacing: .04em; }
+  body { font-family: "Montserrat", system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+         margin: 0; background: var(--bg); color: var(--text); font-size: 16px; line-height: 1.6; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 1.25rem; }
+  /* header band mirrors the cccs.edu site header: blue -> navy with a yellow rule */
+  .site-header { background: linear-gradient(to right, var(--cccs-blue), var(--cccs-navy));
+                 border-bottom: 5px solid var(--cccs-yellow); padding: 2.25rem 0 2rem; margin-bottom: 2rem; }
+  .site-header h1 { font-size: 1.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: .02em;
+                    color: #fff; margin: 0 0 .35rem; }
+  .site-header .sub { color: rgba(255, 255, 255, .85); margin: 0; font-size: .95rem; font-weight: 500; }
+  .stats { display: flex; gap: 1rem; flex-wrap: wrap; margin: 0 0 1.5rem; }
+  .stat { background: #fff; border: 1px solid var(--border); border-top: 3px solid var(--cccs-turquoise);
+          border-radius: 6px; padding: .75rem 1rem; }
+  .stat b { display: block; font-size: 1.5rem; font-weight: 700; color: var(--text-strong); line-height: 1.2; }
+  .stat span { color: var(--text); font-size: .78rem; font-weight: 500; }
+  table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid var(--border);
+          border-radius: 6px; overflow: hidden; }
+  th, td { text-align: left; padding: .65rem .75rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { background: var(--row-head); color: var(--text); font-size: .75rem; font-weight: 600;
+       text-transform: uppercase; letter-spacing: .05em; }
   tr:last-child td { border-bottom: none; }
-  a { color: var(--link); text-decoration: none; }
-  a:hover { text-decoration: underline; }
-  .num { text-align: right; font-variant-numeric: tabular-nums; }
-  .warn { color: var(--warn); font-weight: 600; }
-  .time { color: var(--text-2); font-size: .8rem; white-space: nowrap; }
-  .dim { color: var(--text-2); font-size: .8rem; }
+  a { color: var(--link); text-decoration: none; font-weight: 600; }
+  a:hover { text-decoration: underline; text-decoration-color: var(--cccs-yellow); text-decoration-thickness: 2px; }
+  .num { text-align: right; font-variant-numeric: tabular-nums; color: var(--text-strong); font-weight: 600; }
+  .warn { color: var(--warn); font-weight: 700; }
+  .time { color: var(--text); font-size: .8rem; white-space: nowrap; }
+  .dim { color: var(--text); font-size: .8rem; }
   .trend { white-space: nowrap; }
   .spark { vertical-align: middle; }
-  .badge { display: inline-block; padding: .15rem .5rem; border-radius: 999px; font-size: .75rem; font-weight: 600; }
-  .badge.fresh { background: #0B3A47; color: #4CC9E8; }
-  .badge.stale { background: #2E2410; color: var(--cccs-yellow); }
-  .badge.none  { background: #16232B; color: var(--text-2); }
-  .badge.err   { background: #3A1512; color: var(--warn); }
-  .badge.blocked { background: #2E2410; color: var(--cccs-yellow); }
-  /* footer band mirrors cccs.edu footer: tan background, navy text, yellow rule */
-  footer { margin-top: 2rem; padding: 1.5rem 1.25rem; background: var(--cccs-tan); color: var(--cccs-navy); font-size: .8rem; line-height: 1.6; border-top: 3px solid var(--cccs-yellow); }
-  footer a { color: var(--cccs-blue); }
-  footer code { background: rgba(0, 0, 0, .06); padding: .05rem .3rem; border-radius: 3px; }
+  .badge { display: inline-block; padding: .15rem .55rem; border-radius: 999px; font-size: .75rem; font-weight: 600; }
+  .badge.fresh { background: #e1f3f6; color: var(--cccs-turquoise); }
+  .badge.stale { background: var(--cccs-soft-yellow); color: var(--cccs-navy); }
+  .badge.none  { background: #f0f2f4; color: var(--cccs-gray-blue); }
+  .badge.err   { background: #fbeae5; color: #B23A1F; }
+  .badge.blocked { background: var(--cccs-soft-yellow); color: var(--cccs-navy); }
+  /* footer band mirrors the cccs.edu footer: tan background, navy text, blue links */
+  footer { margin-top: 2.5rem; background: var(--cccs-tan); color: var(--cccs-navy); font-size: .8rem;
+           line-height: 1.7; border-top: 5px solid var(--cccs-yellow); padding: 1.5rem 0; }
+  footer a { color: var(--cccs-blue); font-weight: 600; }
+  footer code { background: rgba(0, 0, 0, .07); padding: .05rem .3rem; border-radius: 3px; }
 </style>
 </head>
 <body>
-<div class="brandbar" aria-hidden="true"></div>
-<div class="wrap">
-  <h1>CCCS Accessibility — Power of 13</h1>
-  <p class="sub">WCAG 2.1 AA audit rollup · 13 colleges + CCCS system site · generated ${esc(now.toUTCString().replace(':00 GMT', ' UTC'))}</p>
+<header class="site-header">
+  <div class="wrap">
+    <h1>CCCS Accessibility — Power of 13</h1>
+    <p class="sub">WCAG 2.1 AA audit rollup · 13 colleges + CCCS system site · generated ${esc(now.toUTCString().replace(':00 GMT', ' UTC'))}</p>
+  </div>
+</header>
+<main class="wrap">
   <div class="stats">
     <div class="stat"><b>${instances.length}</b><span>instances</span></div>
     <div class="stat"><b>${okCount}</b><span>with report data</span></div>
@@ -271,15 +282,17 @@ const html = `<!doctype html>
 ${bodyRows}
     </tbody>
   </table>
-  <footer>
+</main>
+<footer>
+  <div class="wrap">
     Per-college detail: each row links to the college's own audit site. The trend chart plots node-level
     violations per weekly run (source: each results repo's published <code>docs/history.json</code>).
     Pages a college's site serves back as an HTTP error (WAF 403, 404, 5xx) are <em>not</em> audited —
     they are excluded from the violation counts and reported on the college's site as a coverage caveat.
     Reports run weekly (Mondays 06:00 UTC) by independent per-college tooling repos
     (canonical core: <a href="https://github.com/${ORG}/cccs-audit-template">cccs-audit-template</a>).
-  </footer>
-</div>
+  </div>
+</footer>
 </body>
 </html>
 `;
