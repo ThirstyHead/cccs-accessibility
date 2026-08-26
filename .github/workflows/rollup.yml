@@ -5,14 +5,35 @@ on:
     # Tuesdays 06:00 UTC — after the Monday 06:00 UTC weekly college runs
     - cron: "0 6 * * 2"
   workflow_dispatch:
+  push:
+    # Republish automatically when a merge lands on main.
+    #
+    # LOOP GUARD (why the render job has an `if`): the render step commits +
+    # pushes to main, and the generated HTML embeds a render timestamp, so
+    # every publish produces a diff and would re-trigger this very workflow
+    # forever. Runs self-triggered by the bot's own publish push are skipped
+    # (pusher == github-actions[bot]); every other push to main (merges,
+    # direct pushes) publishes exactly once.
+    branches: [main]
 
 permissions:
   contents: write
+
+concurrency:
+  # One publish at a time: if the Tuesday schedule and a merge push land
+  # close together, the later run waits instead of racing on the same commit.
+  group: cccs-rollup-publish
+  cancel-in-progress: false
 
 jobs:
   rollup:
     name: Fetch + render
     runs-on: ubuntu-latest
+    # Skip self-triggered runs (this push is the render job's own publish).
+    # The pusher == github-actions[bot] value also appears on workflow_dispatch
+    # and schedule runs, but those events pass the left-hand clause, so they
+    # always run as before.
+    if: github.event != 'push' || !contains(toJSON(github.event.pusher.login), 'github-actions[bot]')
     steps:
       - name: Check out rollup tooling
         uses: actions/checkout@v4
