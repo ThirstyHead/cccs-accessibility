@@ -151,10 +151,10 @@ function trendSpark(series) {
   const dots = pts
     .map(
       (v, i) =>
-        `<circle cx="${x(i).toFixed(1)}" cy="${y(v).toFixed(1)}" r="${i === last ? 2.6 : 1.6}" fill="${i === last ? '#f0883e' : '#58a6ff'}"/>`,
+        `<circle cx="${x(i).toFixed(1)}" cy="${y(v).toFixed(1)}" r="${i === last ? 2.6 : 1.6}" fill="${i === last ? '#E86A4E' : '#0693E3'}"/>`,
     )
     .join('');
-  return `<svg class="spark" width="${w}" height="${h}" role="img" aria-label="${pts.length} runs, latest ${pts[last]} violations"><polyline points="${line}" fill="none" stroke="#58a6ff" stroke-width="1.5"/>${dots}</svg>`;
+  return `<svg class="spark" width="${w}" height="${h}" role="img" aria-label="${pts.length} runs, latest ${pts[last]} violations"><polyline points="${line}" fill="none" stroke="#0693E3" stroke-width="1.5"/>${dots}</svg>`;
 }
 
 const blockedBadge = (r) =>
@@ -193,38 +193,65 @@ const html = `<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CCCS Accessibility — Power of 13 Rollup</title>
 <style>
-  :root { color-scheme: dark; }
+  :root {
+    color-scheme: dark;
+    /* CCCS brand palette (source: cccs.edu theme --wp--preset--color--*) */
+    --cccs-blue: #004165;
+    --cccs-navy: #03202F;
+    --cccs-gray-blue: #394A58;
+    --cccs-yellow: #FFCB4F;
+    --cccs-tan: #D7D3C7;
+    --cccs-soft-yellow: #FADD80;
+    --cccs-turquoise: #03738C;
+    --cccs-orange: #D74026;
+    /* derived dark-dashboard surfaces tinted from navy (AA-checked on --bg) */
+    --bg: #03202F;
+    --surface: #0A2C3D;
+    --surface-2: #0E3446;
+    --border: #1C3A4A;
+    --text: #E6EDF3;
+    --text-2: #9FB3C1;
+    --link: #FFCB4F;
+    --accent: #0693E3;
+    --warn: #E86A4E;
+  }
   body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-         margin: 0; background: #0d1117; color: #e6edf3; }
+         margin: 0; background: var(--bg); color: var(--text); }
+  /* full-width brand accent bar (cccs.edu header blue->navy with a yellow rule) */
+  .brandbar { height: 6px; background: linear-gradient(to right, var(--cccs-blue), var(--cccs-navy)); border-bottom: 3px solid var(--cccs-yellow); }
   .wrap { max-width: 1120px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
   h1 { font-size: 1.6rem; margin: 0 0 .25rem; }
-  .sub { color: #8b949e; margin: 0 0 1.5rem; }
+  .sub { color: var(--text-2); margin: 0 0 1.5rem; }
   .stats { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
-  .stat { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: .75rem 1rem; }
+  .stat { background: var(--surface); border: 1px solid var(--border); border-top: 3px solid var(--cccs-turquoise); border-radius: 8px; padding: .75rem 1rem; }
   .stat b { display: block; font-size: 1.4rem; }
-  .stat span { color: #8b949e; font-size: .8rem; }
-  table { width: 100%; border-collapse: collapse; background: #161b22; border: 1px solid #30363d; border-radius: 8px; overflow: hidden; }
-  th, td { text-align: left; padding: .6rem .75rem; border-bottom: 1px solid #21262d; vertical-align: top; }
-  th { background: #161b22; color: #8b949e; font-size: .78rem; text-transform: uppercase; letter-spacing: .04em; }
+  .stat span { color: var(--text-2); font-size: .8rem; }
+  table { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  th, td { text-align: left; padding: .6rem .75rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { background: var(--surface-2); color: var(--text-2); font-size: .78rem; text-transform: uppercase; letter-spacing: .04em; }
   tr:last-child td { border-bottom: none; }
-  a { color: #58a6ff; text-decoration: none; }
+  a { color: var(--link); text-decoration: none; }
   a:hover { text-decoration: underline; }
   .num { text-align: right; font-variant-numeric: tabular-nums; }
-  .warn { color: #f0883e; font-weight: 600; }
-  .time { color: #8b949e; font-size: .8rem; white-space: nowrap; }
-  .dim { color: #8b949e; font-size: .8rem; }
+  .warn { color: var(--warn); font-weight: 600; }
+  .time { color: var(--text-2); font-size: .8rem; white-space: nowrap; }
+  .dim { color: var(--text-2); font-size: .8rem; }
   .trend { white-space: nowrap; }
   .spark { vertical-align: middle; }
   .badge { display: inline-block; padding: .15rem .5rem; border-radius: 999px; font-size: .75rem; font-weight: 600; }
-  .badge.fresh { background: #12261e; color: #3fb950; }
-  .badge.stale { background: #2d1d0e; color: #f0883e; }
-  .badge.none  { background: #1c2128; color: #8b949e; }
-  .badge.err   { background: #2d1215; color: #f85149; }
-  .badge.blocked { background: #2d1d0e; color: #f0883e; }
-  footer { margin-top: 2rem; color: #8b949e; font-size: .8rem; line-height: 1.6; }
+  .badge.fresh { background: #0B3A47; color: #4CC9E8; }
+  .badge.stale { background: #2E2410; color: var(--cccs-yellow); }
+  .badge.none  { background: #16232B; color: var(--text-2); }
+  .badge.err   { background: #3A1512; color: var(--warn); }
+  .badge.blocked { background: #2E2410; color: var(--cccs-yellow); }
+  /* footer band mirrors cccs.edu footer: tan background, navy text, yellow rule */
+  footer { margin-top: 2rem; padding: 1.5rem 1.25rem; background: var(--cccs-tan); color: var(--cccs-navy); font-size: .8rem; line-height: 1.6; border-top: 3px solid var(--cccs-yellow); }
+  footer a { color: var(--cccs-blue); }
+  footer code { background: rgba(0, 0, 0, .06); padding: .05rem .3rem; border-radius: 3px; }
 </style>
 </head>
 <body>
+<div class="brandbar" aria-hidden="true"></div>
 <div class="wrap">
   <h1>CCCS Accessibility — Power of 13</h1>
   <p class="sub">WCAG 2.1 AA audit rollup · 13 colleges + CCCS system site · generated ${esc(now.toUTCString().replace(':00 GMT', ' UTC'))}</p>
